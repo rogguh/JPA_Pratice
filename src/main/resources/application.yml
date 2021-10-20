@@ -26,9 +26,9 @@ spring:
       hibernate:
         format_sql: true
 
-
-
-
+# Logging File Import
+logging:
+  config: classpath:log4j2.xml
 
 ---
 #운영
