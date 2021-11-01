@@ -1,11 +1,8 @@
 package com.example.jpa.db.entity;
 
-import lombok.Getter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
 @Table(name = "tBoard")
 @Entity
 public class BoardEntity {

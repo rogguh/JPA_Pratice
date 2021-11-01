@@ -6,14 +6,14 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-	// Log4j2 적용을 위해 'org.springframework.boot:spring-boot-starter-web'에 들어있는 logging 모듈 모두 삭제
-	// 제거하지 않으면 충돌남
+	// LINE :: Log4j2 적용을 위해 'org.springframework.boot:spring-boot-starter-web'에 들어있는 logging 모듈 모두 삭제
+	// LINE :: 제거하지 않으면 충돌남
 	all {
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 	}
@@ -26,10 +26,22 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// LINE :: Log4j2
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.5.5'
-	compileOnly 'org.projectlombok:lombok'
+
+	// LINE :: MariaDB
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	// LINE :: MapStruct
+	implementation 'org.mapstruct:mapstruct:1.3.1.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.3.1.Final'
+
+	// LINE :: Lombok
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
