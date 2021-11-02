@@ -1,10 +1,14 @@
 package com.example.jpa.config;
 
+import java.util.List;
+
 public interface GenericMapperInterface<D, E> {
 
-    // LINE :: Entity To DTO
+    E toEntity(D d);
+
     D toDto(E e);
 
-    // LINE :: DTO To Entity
-    E toEntity(D d);
+    List<D> toDtoList(List<E> entityList);
+
+    List<E> toEntityList(List<D> dtoList);
 }

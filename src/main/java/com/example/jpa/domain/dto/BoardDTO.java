@@ -1,18 +1,22 @@
 package com.example.jpa.domain.dto;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Getter @Setter
+@ToString
+@RequiredArgsConstructor
 public class BoardDTO {
 
     private Long idx;
 
     private String title;
     private String content;
+    private Boolean delStatus;
     private LocalDateTime regDate;
 
 }

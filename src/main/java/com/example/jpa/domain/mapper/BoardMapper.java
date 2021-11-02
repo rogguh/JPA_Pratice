@@ -5,7 +5,21 @@ import com.example.jpa.db.entity.BoardEntity;
 import com.example.jpa.domain.dto.BoardDTO;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface BoardMapper extends GenericMapperInterface<BoardDTO, BoardEntity> {
+
+    @Override
+    BoardEntity toEntity(BoardDTO boardDTO);
+
+    @Override
+    BoardDTO toDto(BoardEntity boardEntity);
+
+    @Override
+    List<BoardDTO> toDtoList(List<BoardEntity> entityList);
+
+    @Override
+    List<BoardEntity> toEntityList(List<BoardDTO> dtoList);
 
 }
