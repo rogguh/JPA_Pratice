@@ -1,17 +1,15 @@
 package com.example.jpa.db.entity;
 
 import com.example.jpa.domain.dto.BoardDTO;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Table(name = "tBoard")
 @Entity
-@ToString
-@RequiredArgsConstructor
+@Table(name = "tBoard")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter @ToString
 public class BoardEntity {
 
     @Id
@@ -25,6 +23,10 @@ public class BoardEntity {
     private Boolean delStatus = false;
     private LocalDateTime regDate;
 
+    /**
+     * FUNCTION :: 생성
+     * @param boardDTO
+     */
     @Builder
     public BoardEntity(BoardDTO boardDTO){
         this.title = boardDTO.getTitle();

@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,24 +22,38 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final BoardMapper boardMapper;
 
+    /**
+     * FUNCTION :: 저장
+     * @param boardDTO
+     * @return
+     */
     public ResponseEntity<ResMessage> save(BoardDTO boardDTO){
 
         BoardEntity board = BoardEntity.builder().boardDTO(boardDTO).build();
         boardRepository.save(board);
 
         ResMessage resMessage = ResMessage.builder().httpStatusEnum(HttpStatusEnum.CREATED)
-                                                    .message("OK")
+                                                    .message("CREATED")
                                                     .build();
 
         return new ResponseEntity<>(resMessage, HttpStatus.CREATED);
     }
 
+    /**
+     * FUNCTION :: 상세
+     * @param idx
+     * @return
+     */
+    @Transactional(readOnly = true)
     public ResponseEntity<ResMessage> view(Long idx){
         BoardEntity board = boardRepository.findByIdx(idx);
-        log.info("board값 : " + board.toString());
         BoardDTO boardDTO = boardMapper.toDto(board);
-        log.info("boardDTO값 : " + boardDTO.toString());
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        ResMessage resMessage = ResMessage.builder().httpStatusEnum(HttpStatusEnum.OK)
+                                                    .message("OK")
+                                                    .data(boardDTO)
+                                                    .build();
+
+        return new ResponseEntity<>(resMessage, HttpStatus.OK);
     }
 }
