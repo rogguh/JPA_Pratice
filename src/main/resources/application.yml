@@ -11,9 +11,9 @@ spring:
   datasource:
     hikari:
       driver-class-name: org.mariadb.jdbc.Driver
-      jdbc-url: jdbc:mariadb://52.78.247.211:3306/roggu?serverTimezone=Asia/Seoul&autoReconnect=true
-      username: rogguh
-      password: roggu123!@#
+      jdbc-url: jdbc:mariadb://127.0.0.1:3306/roggu?serverTimezone=Asia/Seoul&autoReconnect=true
+      username: root
+      password: roggu!@#
   # JPA 설정
   jpa:
     database-platform: org.hibernate.dialect.MariaDB103Dialect
@@ -29,6 +29,11 @@ spring:
 # Logging File Import
 logging:
   config: classpath:log4j2.xml
+
+# File Upload Path
+file:
+  upload:
+    path: D:\web\uploadpath
 
 ---
 #운영

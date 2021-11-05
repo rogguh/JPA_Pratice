@@ -1,5 +1,6 @@
 package com.example.jpa.db.entity;
 
+import com.example.jpa.common.util.FileUtil;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,9 +39,9 @@ public class FileEntity {
     @Builder
     public FileEntity(BoardEntity board, MultipartFile multipartFile){
         this.board = board;
-        this.filePath = "";
+        this.filePath = FileUtil.fileUploadPath;
         this.uuid = UUID.randomUUID().toString();
-        this.fileName = "";
+        this.fileName = multipartFile.getOriginalFilename();
         this.size = multipartFile.getSize();
         this.ext = fileName.substring(fileName.lastIndexOf(".")+1);
         this.regDateTime = LocalDateTime.now();

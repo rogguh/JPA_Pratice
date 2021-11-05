@@ -1,7 +1,7 @@
 package com.example.jpa.board;
 
-import com.example.jpa.common.HttpStatusEnum;
-import com.example.jpa.common.ResMessage;
+import com.example.jpa.common.api.HttpStatusEnum;
+import com.example.jpa.common.api.ResMessage;
 import com.example.jpa.db.entity.BoardEntity;
 import com.example.jpa.db.repository.BoardRepository;
 import com.example.jpa.domain.dto.BoardDTO;
@@ -27,16 +27,16 @@ public class BoardService {
      * @param boardDTO
      * @return
      */
-    public ResponseEntity<ResMessage> save(BoardDTO boardDTO){
+    public void save(BoardDTO boardDTO) {
 
         BoardEntity board = BoardEntity.builder().boardDTO(boardDTO).build();
         boardRepository.save(board);
 
-        ResMessage resMessage = ResMessage.builder().httpStatusEnum(HttpStatusEnum.CREATED)
+        /*ResMessage resMessage = ResMessage.builder().httpStatusEnum(HttpStatusEnum.CREATED)
                                                     .message("CREATED")
                                                     .build();
 
-        return new ResponseEntity<>(resMessage, HttpStatus.CREATED);
+        return new ResponseEntity<>(resMessage, HttpStatus.CREATED);*/
     }
 
     /**

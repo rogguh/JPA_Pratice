@@ -1,6 +1,6 @@
 package com.example.jpa.board;
 
-import com.example.jpa.common.ResMessage;
+import com.example.jpa.common.api.ResMessage;
 import com.example.jpa.domain.dto.BoardDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping(value = "/board")
-    public ResponseEntity<ResMessage> save(BoardDTO boardDTO){
-        return boardService.save(boardDTO);
+    public void save(BoardDTO boardDTO) {
+        boardService.save(boardDTO);
     }
 
     @GetMapping(value = "/board/{idx}")

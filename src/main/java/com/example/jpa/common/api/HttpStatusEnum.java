@@ -1,4 +1,4 @@
-package com.example.jpa.common;
+package com.example.jpa.common.api;
 
 public enum HttpStatusEnum {
 

@@ -4,7 +4,10 @@ import com.example.jpa.domain.dto.BoardDTO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.File;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tBoard")
@@ -15,13 +18,16 @@ public class BoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_idx")
-    private Long idx;
+    private Long idx;                                                                   // LINE :: 고유값
 
-    private String title;
-    private String content;
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    private List<FileEntity> attachedFiles = new ArrayList<>();                         // LINE :: 첨부 파일 리스트
+
+    private String title;                                                               // LINE :: 제목
+    private String content;                                                             // LINE :: 내용
     @Column(columnDefinition = "bit default 0")
-    private Boolean delStatus = false;
-    private LocalDateTime regDate;
+    private Boolean delStatus = false;                                                  // LINE :: 삭제여부
+    private LocalDateTime regDate;                                                      // LINE :: 등록일
 
     /**
      * FUNCTION :: 생성
@@ -33,5 +39,15 @@ public class BoardEntity {
         this.content = boardDTO.getContent();
         this.delStatus = boardDTO.getDelStatus();
         this.regDate = LocalDateTime.now();
+
+        // LINE :: 첨부파일 존재
+        if(!boardDTO.getAttachedFiles().isEmpty()){
+            boardDTO.getAttachedFiles().stream().forEach(attachedFile -> {
+                this.attachedFiles.add(FileEntity.builder()
+                                  .board(this)
+                                  .multipartFile(attachedFile)
+                                  .build());
+            });
+        }
     }
 }
