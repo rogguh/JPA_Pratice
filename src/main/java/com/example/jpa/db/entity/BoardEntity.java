@@ -4,7 +4,6 @@ import com.example.jpa.domain.dto.BoardDTO;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class BoardEntity {
         this.regDate = LocalDateTime.now();
 
         // LINE :: 첨부파일 존재
-        if(!boardDTO.getAttachedFiles().isEmpty()){
+        if(boardDTO.getAttachedFiles() != null && boardDTO.getAttachedFiles().size() > 0){
             boardDTO.getAttachedFiles().stream().forEach(attachedFile -> {
                 this.attachedFiles.add(FileEntity.builder()
                                   .board(this)

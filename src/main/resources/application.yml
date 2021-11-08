@@ -41,3 +41,4 @@ spring:
   config:
     activate:
       on-profile: "real"
+

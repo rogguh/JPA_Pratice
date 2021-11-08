@@ -45,6 +45,8 @@ public class FileEntity {
         this.size = multipartFile.getSize();
         this.ext = fileName.substring(fileName.lastIndexOf(".")+1);
         this.regDateTime = LocalDateTime.now();
+
+        FileUtil.fileUpload(filePath, uuid, multipartFile);
     }
 
     /**
