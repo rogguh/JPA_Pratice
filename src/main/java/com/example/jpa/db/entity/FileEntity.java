@@ -2,6 +2,7 @@ package com.example.jpa.db.entity;
 
 import com.example.jpa.common.util.FileUtil;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "tFile")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicUpdate
 @Getter @ToString
 public class FileEntity {
 

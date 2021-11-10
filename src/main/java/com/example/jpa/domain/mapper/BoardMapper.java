@@ -4,6 +4,7 @@ import com.example.jpa.config.GenericMapperInterface;
 import com.example.jpa.db.entity.BoardEntity;
 import com.example.jpa.domain.dto.BoardDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public interface BoardMapper extends GenericMapperInterface<BoardDTO, BoardEntit
     BoardEntity toEntity(BoardDTO boardDTO);
 
     @Override
+    @Mapping(target = "attachedFiles", ignore = true)
     BoardDTO toDto(BoardEntity boardEntity);
 
     @Override

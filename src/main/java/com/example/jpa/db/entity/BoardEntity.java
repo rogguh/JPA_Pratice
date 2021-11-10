@@ -2,6 +2,7 @@ package com.example.jpa.db.entity;
 
 import com.example.jpa.domain.dto.BoardDTO;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "tBoard")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicUpdate
 @Getter @ToString
 public class BoardEntity {
 
@@ -27,6 +29,8 @@ public class BoardEntity {
     @Column(columnDefinition = "bit default 0")
     private Boolean delStatus = false;                                                  // LINE :: 삭제여부
     private LocalDateTime regDate;                                                      // LINE :: 등록일
+    @Column(columnDefinition = "int default 0")
+    private int hits = 0;                                                               // LINE :: 조회수
 
     /**
      * FUNCTION :: 생성
@@ -36,7 +40,6 @@ public class BoardEntity {
     public BoardEntity(BoardDTO boardDTO){
         this.title = boardDTO.getTitle();
         this.content = boardDTO.getContent();
-        this.delStatus = boardDTO.getDelStatus();
         this.regDate = LocalDateTime.now();
 
         // LINE :: 첨부파일 존재
@@ -48,5 +51,19 @@ public class BoardEntity {
                                   .build());
             });
         }
+    }
+
+    /**
+     * FUNCTION :: 상세
+     */
+    public void view(){
+        hits++;
+    }
+
+    /**
+     * FUNCTION :: 삭제
+     */
+    public void delete(){
+        delStatus = true;
     }
 }

@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,8 +18,7 @@ public class BoardDTO {
     private String content;
     private Boolean delStatus;
     private LocalDateTime regDate;
-    @Column(columnDefinition = "int default 0")
-    private int hits = 0;
+    private int hits;
 
     private List<MultipartFile> attachedFiles;
 
