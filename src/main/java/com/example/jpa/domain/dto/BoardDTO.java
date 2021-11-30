@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter @Setter
 @ToString
-public class BoardDTO {
+public class BoardDTO extends PagingDTO{
 
     private Long idx;
 

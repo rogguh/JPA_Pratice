@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -30,10 +32,21 @@ public class BoardService {
      * @return
      */
     public ResponseEntity<ResMessage> search(BoardDTO boardDTO){
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-        List<BoardEntity> list = boardQueryDslRepository.findAllByDto(boardDTO);
+        long count = boardQueryDslRepository.countAllByDto(boardDTO);
+        boardDTO.setTotalCount(count);
+        List<BoardDTO> list = boardQueryDslRepository.findAllByDto(boardDTO);
 
-        return null;
+        rtnMap.put("boardDTO", boardDTO);
+        rtnMap.put("list", list);
+
+        ResMessage resMessage = ResMessage.builder().httpStatusEnum(HttpStatusEnum.OK)
+                                                    .message("OK")
+                                                    .data(rtnMap)
+                                                    .build();
+
+        return new ResponseEntity<>(resMessage, HttpStatus.OK);
     }
 
     /**
